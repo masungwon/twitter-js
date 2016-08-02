@@ -11,12 +11,16 @@ router.get('/', function (req, res) {
 
 module.exports = router;
 
-router.get('/stylesheets/style.css', function (req, res) {
-	res.sendFile(path.join(__dirname, '../public/stylesheets/style.css'));
+router.use(express.static('public'));
+
+// router.get('/stylesheets/style.css', function (req, res) {
+// 	res.sendFile(path.join(__dirname, '../public/stylesheets/style.css'));
+
+
 
 	//why doesn't this work?
 	//res.sendFile(__dirname + '../public/stylesheets/style.css');
-})
+// })
 
 
 
