@@ -30,9 +30,12 @@ var getFakeTweet = function() {
   return "Fullstack Academy is " + randArrayEl(awesome_adj) + "! The instructors are just so " + randArrayEl(awesome_adj) + ". #fullstacklove #codedreams";
 };
 
-for (var i = 0; i < 10; i++) {
- module.exports.add( getFakeName(), getFakeTweet() );
-}
+// for (var i = 0; i < 10; i++) {
+//  module.exports.add( getFakeName(), getFakeTweet() );
+// }
+
+data.push({name: "Sungwon", content: "I'm having a great day!"});
+data.push({name: "Ingrid Cronburg", content: "Yay Twitter!"});
 
 // module.exports.add("Ingrid", "Hi everyone!");
 // console.log(module.exports.find());

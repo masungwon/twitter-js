@@ -1,12 +1,27 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
+var bodyParser = require('body-parser');
 
 var tweetBank = require('../tweetBank');
 
+// parse application/x-www-form-urlencoded
+router.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+router.use(bodyParser.json());
+
 router.get('/', function (req, res) {
   var tweets = tweetBank.list();
-  res.render( 'index', { tweets: tweets } );
+  res.render( 'index', { tweets: tweets, showForm: true } );
+});
+
+router.post('/tweets', function(req, res) {
+  var name = req.body.name;
+  var text = req.body.text;
+  tweetBank.add(name, text);
+  console.log("the body's name is " + req.body.name);
+  res.redirect('/');
 });
 
 module.exports = router;
@@ -15,11 +30,15 @@ router.use(express.static('public'));
 
 // say that a client GET requests the path /users/nimit
 router.get( '/users/:name', function (req, res) {
-  var tweets = tweetBank.find(req.params.name, function(item) {
-  	return item === req.params.name;
+  var tweets = tweetBank.find(function(item) {
+  	return item.name === req.params.name;
   });
-	res.render( 'index', { tweets: tweets } );
-	console.log(req.params.name, tweets);
+  console.log("this is the tweets array" + tweets);
+  //console.log(' {tweets: tweets} is ' + Object.keys({ tweets: tweets });
+	res.render( 'index', { tweets: tweets, showForm: true, user: req.params.name } );
+	
+
+  //console.log(req.params.name, tweets);
 
    // --> 'nimit'
 });
