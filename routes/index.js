@@ -2,9 +2,11 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 var bodyParser = require('body-parser');
-
 var tweetBank = require('../tweetBank');
+var socketio = require('socket.io');
 
+var server = app.listen(3000);
+var io = socketio.listen(server);
 // parse application/x-www-form-urlencoded
 router.use(bodyParser.urlencoded({ extended: false }));
 
